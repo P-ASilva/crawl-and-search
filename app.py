@@ -1,5 +1,7 @@
 from flask import Flask
 from flask import request
+from sklearn.feature_extraction.text import TfidfVectorizer
+import re
 from bs4 import BeautifulSoup
 import requests
 import pandas as pd
@@ -59,5 +61,16 @@ def request_test():
 def query():
     q = request.args.get('query')
 
+    # df = pd.read_csv("cnn.csv")
+    # vectorizer = TfidfVectorizer()
+    # df['Plot'] = df['content'].apply(lambda x: x.upper())
+
+    # X = vectorizer.fit_transform(df['Plot'])
+
+    # Q = vectorizer.transform(['Zombie apocalypse'])
+    # R = X @ Q.T
+    # R = R.toarray().flatten()
+    # idx = R.argsort()[-3]
+    # print(df.iloc[idx]['title'])
 
     return f"Query: {q}"
