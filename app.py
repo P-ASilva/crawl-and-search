@@ -61,16 +61,15 @@ def request_test():
 def query():
     q = request.args.get('query')
 
-    # df = pd.read_csv("cnn.csv")
-    # vectorizer = TfidfVectorizer()
-    # df['Plot'] = df['content'].apply(lambda x: x.upper())
+    df = pd.read_csv("cnn.csv")
+    vectorizer = TfidfVectorizer()
+    df['Plot'] = df['content'].apply(lambda x: x.upper())
 
-    # X = vectorizer.fit_transform(df['Plot'])
+    X = vectorizer.fit_transform(df['Plot'])
 
-    # Q = vectorizer.transform(['Zombie apocalypse'])
-    # R = X @ Q.T
-    # R = R.toarray().flatten()
-    # idx = R.argsort()[-3]
-    # print(df.iloc[idx]['title'])
+    Q = vectorizer.transform(['Zombie apocalypse'])
+    R = X @ Q.T
+    R = R.toarray().flatten()
+    idx = R.argsort()[-10]
 
-    return f"Query: {q}"
+    return df.iloc[idx]
