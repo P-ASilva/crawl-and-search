@@ -22,8 +22,9 @@ def query():
     df['content'] = df['content'].apply(lambda x: x.lower().strip())
 
     X = vectorizer.fit_transform(df['content'])
-
-    Q = vectorizer.transform([str(q).lower().strip()])
+    q = q.lower()
+    Q = vectorizer.transform([q])
+    print(q)
     R = X @ Q.T
     R = R.toarray().flatten()
 
