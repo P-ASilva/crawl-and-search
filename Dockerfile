@@ -9,4 +9,9 @@ COPY . /app/
     
 EXPOSE 4040
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "4040"]
+# Define environment variable for Flask
+ENV FLASK_APP=app.py
+ENV FLASK_RUN_HOST=0.0.0.0
+ENV FLASK_RUN_PORT=4040
+
+CMD ["flask", "run"]
