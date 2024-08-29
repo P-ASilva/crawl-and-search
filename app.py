@@ -37,5 +37,5 @@ def query():
     sorted_results = sorted(json_dict.items(), key=lambda x: x[1]['relevance'], reverse=True)
     ordered_results = [result[1] for result in sorted_results if result[1]['relevance'] != 0]
     json_dict = {"results": ordered_results}
-    # print(json_dict)
+
     return jsonify(json_dict)
