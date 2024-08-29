@@ -28,10 +28,10 @@ def query():
     R = X @ Q.T
     R = R.toarray().flatten()
 
-    idx = R.argsort()[-10:]
+    idx = R.argsort()[-10:][::-1]
     
     dff = df.loc[idx]
-    dff['relevance'] = R.argsort()[-10:].tolist()
+    dff['relevance'] = R[idx].tolist()
     print(dff['relevance'])
 
     json_dict = {title: {"subtitle":subtitle, "content": content[:500*4], "relevance": relevance} for title, subtitle, content, relevance in zip(dff["title"], dff['subtitle'], dff['content'], dff['relevance'])}
