@@ -36,7 +36,7 @@ def query():
 
     json_dict = {title: {"subtitle":subtitle, "content": content[:500*4], "relevance": relevance} for title, subtitle, content, relevance in zip(dff["title"], dff['subtitle'], dff['content'], dff['relevance'])}
     sorted_results = sorted(json_dict.items(), key=lambda x: x[1]['relevance'], reverse=True)
-    ordered_results = [result[1] for result in sorted_results if result[1]['relevance'] != 0]
+    ordered_results = [result[1] for result in sorted_results if result[1]['relevance'] >= 0.1]
     json_dict = {"results": ordered_results}
 
     return jsonify(json_dict)
