@@ -19,7 +19,7 @@ def query():
     # read cnn.csv with indexes 
     df = pd.read_csv('cnn.csv', sep=',')
     vectorizer = TfidfVectorizer()
-    df['content'] = df['content'].apply(lambda x: x.lower().strip())
+    df['content'] = df['content'].apply(lambda x: x.lower())
 
     X = vectorizer.fit_transform(df['content'])
     q = q.lower()
