@@ -55,17 +55,17 @@ Este documento fornece uma visão geral da funcionalidade implementada no script
 
 #### O que é TF-IDF?
 
-TF-IDF (Term Frequency-Inverse Document Frequency) é uma medida estatística usada para avaliar a importância de uma palavra em um documento em relação a um conjunto de documentos (ou corpus). É comumente usada em recuperação de informação, mineração de texto e motores de busca.
+**TF-IDF (Term Frequency-Inverse Document Frequency)** é uma medida estatística usada para avaliar a importância de uma palavra em um documento em relação a um conjunto de documentos (ou corpus). É comumente usada em recuperação de informação, mineração de texto e motores de busca.
 
-##### 1. Frequência de Termos (TF)
+1. **Frequência de Termos (TF)**:
 
 **TF (Term Frequency)** mede a frequência com que um termo aparece em um documento específico. Quanto maior a frequência do termo dentro do documento, maior será o valor de TF. Para levar em consideração o comprimento do documento, o TF é normalmente normalizado.
 
-##### 2. Frequência Inversa de Documentos (IDF)
+2. **Frequência Inversa de Documentos (IDF)**:
 
 **IDF (Inverse Document Frequency)** avalia a importância de um termo em todo o corpus. Termos que aparecem em muitos documentos recebem uma pontuação IDF menor, indicando que são comuns e menos informativos. Por outro lado, termos que aparecem em poucos documentos têm uma pontuação IDF mais alta, sugerindo que são mais únicos e significativos.
 
-##### 3. Pontuação TF-IDF
+3. **Pontuação TF-IDF**:
 
 A pontuação TF-IDF é o produto de TF e IDF. Esta pontuação destaca termos que são frequentes em um documento específico, mas raros em todo o corpus, tornando-os mais relevantes para a identificação do conteúdo único do documento.
 

@@ -49,21 +49,11 @@ This document provides an overview of the functionality implemented in the `app.
    - The top 10 most relevant documents are selected based on their similarity scores.
    - The results are then formatted and returned as a JSON object, containing the title, subtitle, content snippet and relevance score for each document. If this application is deployed, proper credit and citations will be added with hyperlinks.
 
-#### What is TF-IDF?
-
-TF-IDF (Term Frequency-Inverse Document Frequency) is a statistical measure used to evaluate the importance of a word in a document relative to a collection of documents (or corpus). It is commonly used in information retrieval, text mining, and search engines.
-
-##### 1. Term Frequency (TF)
-
-Here's how the TF-IDF explanation can be formatted for a `README.md` file:
-
----
-
-### Understanding TF-IDF
+#### Understanding TF-IDF
 
 **TF-IDF (Term Frequency-Inverse Document Frequency)** is a numerical statistic that is widely used in information retrieval and text mining to assess the importance of a word in a document relative to a collection of documents (also known as a corpus).
 
-#### 1. Term Frequency (TF)
+1. **Term Frequency (TF)**:
 - **Definition**: TF measures how frequently a term appears in a document.
 - **Abstraction**:
   
@@ -73,7 +63,7 @@ Here's how the TF-IDF explanation can be formatted for a `README.md` file:
 
 - **Purpose**: A higher term frequency indicates that the word is significant within that document.
 
-#### 2. Inverse Document Frequency (IDF)
+2. **Inverse Document Frequency (IDF)**:
 - **Definition**: IDF measures how important a term is across the entire corpus.
 - **Abstraction**:
   
@@ -83,7 +73,7 @@ Here's how the TF-IDF explanation can be formatted for a `README.md` file:
 
 - **Purpose**: A high IDF value indicates that the term is rare in the corpus, and therefore, more significant.
 
-#### 3. TF-IDF Score
+3. **TF-IDF Score**:
 - **Definition**: The TF-IDF score is the product of TF and IDF.
 - **Abstraction**:
   
