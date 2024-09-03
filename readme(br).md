@@ -37,18 +37,19 @@ Este documento fornece uma visão geral da funcionalidade implementada no script
 5. **Cálculo de Similaridade**:
    - A similaridade entre a consulta vetorizada e cada documento no dataset é calculada da seguinte forma:
    
-   ```python
-   X = vectorizer.fit_transform(df['content'])
-   q = q.lower()
-   Q = vectorizer.transform([q])
-   R = X @ Q.T
-   R = R.toarray().flatten()
+    ```python
+    X = vectorizer.fit_transform(df['content'])
+    q = q.lower()
+    Q = vectorizer.transform([q])
+    R = X @ Q.T
+    R = R.toarray().flatten()
    ```
    - `X = vectorizer.fit_transform(df['content'])`: Para usar o processo de busca TF-IDF, devemos primeiro converter o dataset que iremos buscar em uma forma abstrata, que funciona como um vocabulário e um indicador de frequência das palavras em cada documento no DataFrame completo 'content'. (também descrito no item 3)
-   - `Q = vectorizer.transform([q])`: Primeiro no processo de busca, transformamos nossa consulta em uma matriz esparsa, modelada de forma a combinar formas com a matriz X, representando a distribuição de palavras na consulta, baseada nas palavras presentes no dataset completo 'content'. (também descrito no item 4)
-   - `R = X @ Q.T`: Esta linha de código realiza uma multiplicação de matrizes entre os dados transformados X e a consulta transformada Q, resultando em um número de relevância que reflete a similaridade entre a consulta e os documentos presentes em X.
+   - `Q = vectorizer.transform([q])`: Primeiro no processo de busca, transformamos nossa query em uma matriz esparsa, modelada de forma ser compátivel em tamanho com a matriz X, representando a distribuição de palavras na query, baseada nas palavras presentes no dataset completo 'content'. (também descrito no item 4)
+   - `R = X @ Q.T`: Esta linha de código realiza uma multiplicação de matrizes entre os dados transformados X e a query transformada Q, resultando em um número de relevância que reflete a similaridade entre a query e os documentos representados em X.
 
    - Os documentos são classificados com base em sua pontuação de similaridade com a consulta.
+
 6. **Filtragem e Exibição dos Resultados**:
    - Os 10 documentos mais relevantes são selecionados com base em suas pontuações de similaridade.
    - Os resultados são então formatados e retornados como um objeto JSON, contendo o título, subtítulo, trecho do conteúdo e a pontuação de relevância de cada documento. Se esta aplicação for implantada, créditos e citações adequados serão adicionados com hiperlinks.
@@ -59,7 +60,7 @@ Este documento fornece uma visão geral da funcionalidade implementada no script
 
 1. **Frequência de Termos (TF)**:
 
-**TF (Term Frequency)** mede a frequência com que um termo aparece em um documento específico. Quanto maior a frequência do termo dentro do documento, maior será o valor de TF. Para levar em consideração o comprimento do documento, o TF é normalmente normalizado.
+**TF (Term Frequency)** mede a frequência com que um termo aparece em um documento específico. Quanto maior a frequência do termo dentro do documento, maior será o valor de TF. Para levar em consideração o comprimento do documento, o TF é normalizado.
 
 2. **Frequência Inversa de Documentos (IDF)**:
 
@@ -108,8 +109,21 @@ A pontuação TF-IDF é o produto de TF e IDF. Esta pontuação destaca termos q
    Você pode enviar consultas de busca ao endpoint `/query` para recuperar os artigos relevantes com base no conteúdo extraído da CNN.
 
 #### Por que buscar as notícias mais recentes da CNN?
-Atualmente, não há uma necessidade funcional, pois a CNN já oferece uma função de busca em seu site. O que pode ser feito com isso é a comparação de diferentes algoritmos e métodos de busca em relação ao que já é usado no mercado, o que, para meus estudos atuais de PLN (Processamento de Linguagem Natural), pode ser uma medida valiosa de progresso.
-No futuro, o objetivo deste projeto mudará dependendo dos meus estudos. No momento, estou brincando com a ideia de um sistema de detecção de viés, mas para começar, vou adicionar outro scraper e mais alguns algoritmos de busca para praticar em diferentes plataformas de notícias, além de melhorar o modelo TF-IDF, incluindo um grau de relevância para os subtítulos e títulos, a fim de aumentar a precisão da busca.
+Ao isolarmos notícias recentes, podemos fazer buscas orientadas a relevância jornalistica de pessoas, instituições e temas dentro das notícias armazenadas no banco de dados. A utilidade deste projeto se encontra na identificação de tópicos populares e mudanças na cobertura de mídia de diversos temas, enquanto mantém uma base de dados adaptável, com sua aplicação real sendo dependente do escopo da análise, periodo de coleta dos dados e quantidade coletada.
+
+#### Casos de teste/controle:
+Para testar o processo de busca, alguns casos de controle foram criados que permitem algumas inferências baseadas nos dados obtidos. 
+1. **http://10.103.0.28:4040/query?query=banco%20central**: 
+    Teste com 10 resultados relevantes (Muito relevante). 
+    Ao fornecer a query "Banco Central" temos o retorno de 10 resultados, visto que é um tópico bem popular nessa versão do banco de dados (09/2024) isso também pode ser observado na pontuação de relevância da query.
+2. **http://10.103.0.28:4040/query?query=cyrus%20de%20la%20rubia**
+    Teste com menos de 10 resultados (Pouco relevante).
+    Ao fornecer a query "cyrus de la rubia" temos o retorno de menos de 10 notícias, o que é esperado visto que seu nome é não é mencionado com tanta frequência nesta coletânea de notícias.
+3. **http://10.103.0.28:4040/query?query=desastre%20climatico%20muitos%20mortos**:
+    Teste com resultado não-óbvio (específico).
+    Ao fornecer a query "desastre climatico muitos mortos" percebe-se que a notícia que aparece não se refere diretamente ao ocorrido, nem a custos correlatos no nível estatal. O resultado se refere a mudanças nacionais em hábitos de consumo, mostrando como a relevância jornalistica desses termos não é muito alta neste banco de dados.
+
+**OBS:** Toda e qualquer inferência com base nos dados está sugeita a variabilidade dos dados utilizados e restrições/temas da rede de notícias de onde foram retirados os dados.
 
 #### Conclusão
-Esta aplicação combina técnicas de web scraping e processamento de texto para fornecer um banco de dados pesquisável de artigos da CNN. Ela aproveita o poder do TF-IDF para resultados de busca eficientes e relevantes, tornando-se uma ferramenta robusta para consultas em grandes conjuntos de dados de texto, embora possa não ser competitiva com as soluções de mercado existentes.
+Esta aplicação combina técnicas de web scraping e processamento de texto para fornecer um banco de dados pesquisável de artigos da CNN. Ela aproveita o poder do TF-IDF para resultados de busca eficientes e relevantes, tornando-se uma ferramenta robusta para consultas em grandes conjuntos de dados de texto e uma boa opção para coleta de dados de notícias recentes.

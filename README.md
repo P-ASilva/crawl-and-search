@@ -123,9 +123,23 @@ This document provides an overview of the functionality implemented in the `app.
 4. **Access the API**: 
    You can send search queries to the `/query` endpoint to retrieve the relevant articles based on the content scraped from CNN.
 
-#### Why search the most recent news in CNN?
-Currently, there’s no functional need as CNN already offers a search function on their website. What can be done with it is the comparison of different search algorithms and methods based on what already is used in market, which for my current studies o NLP (Natural Language Processing) could prove as a valuable gauge for progress.
-In the future, the goal of this project will change depending on my studies. Currently, I'm playing with the idea of a bias detection system, but for starters I'll add another scraper and a few more search algorithms to practice on diferent new's platforms, while also improving on the TF-IDF model, including a degree of relevance for the subtitles and titles in order to increase search accuracy.
+#### Why Search the Most Recent News on CNN?
+By isolating recent news, we can perform searches focused on the journalistic relevance of people, institutions, and areas of interest. The utility of this project, therefore, lies in identifying popular topics and detecting changes in media coverage across various subjects, while being focused in an adaptable data sample.
+
+#### Test/Control Cases:
+In order to test the search process, a few control cases where explored and may allow for inferences based on the data sample obtained in the scraping process.
+
+1. **http://10.103.0.28:4040/query?query=banco%20central**: 
+    Test with 10 relevant results (Highly relevant). 
+    When providing the query "Banco Central," we get more than 10 results in return, as it is a very popular in the data we collected. This can also be observed in the relevance score of the query.
+2. **http://10.103.0.28:4040/query?query=cyrus%20de%20la%20rubia**:
+    Test with fewer than 10 results (Less relevant).
+    When providing the query "Cyrus de la Rubia," we get fewer than 10 news articles in return, which is expected since his name is not mentioned frequently in the current data sample (2024.2), and his journalistic relevance is due to mentions made by Luis Inácio rather than the recency and scope of his actions.
+3. **http://10.103.0.28:4040/query?query=desastre%20climatico%20muitos%20mortos**:
+    Test with non-obvious results (Specific).
+    When providing the query "climate disaster many dead," it is noticeable that the news article that appears does not directly refer to the event itself, nor to related costs at the state level. The result refers to national changes in consumption habits, showing how the journalistic relevance of the event itself is not very high in this iteration of the dataframe.
+
+**Note:** Any and all inferences based on the data are subject to the variability of the data used and the restrictions/themes of the news network from which the data were sourced.
 
 #### Conclusion
-This application combines web scraping and text processing techniques to provide a searchable database of CNN articles. It leverages the power of TF-IDF for efficient and relevant search results, making it a robust tool for querying large text datasets, though it may not be competitive with existing market solutions.
+This application combines web scraping and text processing techniques to provide a searchable database of CNN articles. It leverages the power of TF-IDF for efficient and relevant search results, making it a robust tool for querying large text datasets and a good option for data collection on news articles.
