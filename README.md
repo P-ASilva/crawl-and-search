@@ -1,7 +1,8 @@
 ### CNN Web Scraping and TF-IDF Search Process
 
 #### Introduction
-This document provides an overview of the functionality implemented in the `app.py` script, which is designed to perform a search on the 2700 most recent news on CNN's website, utilizing the TF-IDF (Term Frequency-Inverse Document Frequency) algorithm to search through data scraped using the `webscraper_cnn.py` script. The application is built using Flask and the number of news can be changed within the scraper's code, but for this iteration I decided against making adaptations in order to save time.
+This project aims to provide a functional API template to search on a document database using their contents to provide a relevancy score for each document. The `app.py` script utilizes the TF-IDF (Term Frequency-Inverse Document Frequency) algorithm to search through the data scraped using the `webscraper_cnn.py` script, which is currently set to scrape CNN's website, where it'll be extracting new's titles, subtitles and content for the purpose of generating a unique database for document classification.
+*The application is built using Flask and the number of news can be changed within the scraper's code.*
 
 #### Project Structure
 
