@@ -84,8 +84,6 @@ This project aims to provide a functional API template to search on a document d
 
 - **Purpose**: This score helps highlight words that are both frequent in a document and rare across the corpus, making them more relevant for identifying the document's unique content.
 
----
-
 #### API Endpoints
 
 - **`/`**: A simple endpoint that returns a "Hello, World!" message to ensure the server is running.
@@ -93,10 +91,8 @@ This project aims to provide a functional API template to search on a document d
 
   **Example Usage**:
   ```bash
-  http://localhost:5000/query?query=your_search_term
+  http://localhost:4040/query?query=your_search_term
   ```
-
-  The response is a JSON object containing the most relevant articles along with their associated metadata.
 
 #### Installation and Setup
 
@@ -143,4 +139,4 @@ In order to test the search process, a few control cases where explored and may 
 **Note:** Any and all inferences based on the data are subject to the variability of the data used and the restrictions/themes of the news network from which the data were sourced.
 
 #### Conclusion
-This application combines web scraping and text processing techniques to provide a searchable database of CNN articles. It leverages the power of TF-IDF for efficient and relevant search results, making it a robust tool for querying large text datasets and a good option for data collection on news articles.
+This application combines web scraping and text processing techniques to provide a searchable database of CNN articles. It leverages the power of TF-IDF for efficient and relevant search results, making it a robust tool for querying large text datasets and a good start for data collection on news articles.
