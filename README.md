@@ -131,12 +131,12 @@ In order to test the search process, a few control cases where explored and may 
     When providing the query "Banco Central," we get more than 10 results in return, as it is a very popular in the data we collected. This can also be observed in the relevance score of the query.
 2. **http://10.103.0.28:4040/query?query=cyrus%20de%20la%20rubia**:
     Test with fewer than 10 results (Less relevant).
-    When providing the query "Cyrus de la Rubia," we get fewer than 10 news articles in return, which is expected since his name is not mentioned frequently in the current data sample (2024.2), and his journalistic relevance is due to mentions made by Luis Inácio rather than the recency and scope of his actions.
+    When providing the query "Cyrus de la Rubia," we get fewer than 10 news articles in return, which is expected since this name is not mentioned frequently in the current data sample (2024.2) and it's journalistic relevance could be linked to mentions from others.
 3. **http://10.103.0.28:4040/query?query=desastre%20climatico%20muitos%20mortos**:
     Test with non-obvious results (Specific).
-    When providing the query "climate disaster many dead," it is noticeable that the news article that appears does not directly refer to the event itself, nor to related costs at the state level. The result refers to national changes in consumption habits, showing how the journalistic relevance of the event itself is not very high in this iteration of the dataframe.
+    When providing the query "climate disaster many dead," it is noticeable that the news article that appears does not directly refer to causes of a disaster, nor to related costs at the state level. The result refers to national changes in consumption habits, which could indicate that the journalistic relevance of the disaster itself is not very high in this iteration of the dataframe.
 
-**Note:** Any and all inferences based on the data are subject to the variability of the data used and the restrictions/themes of the news network from which the data were sourced.
+**Note:** Any and all inferences based on the data are subject to the variability of the data used and the restrictions/themes of the news network from which the data were sourced, these are examples of information that may or not be accurate to the truth of the matter.
 
 #### Conclusion
 This application combines web scraping and text processing techniques to provide a searchable database of CNN articles. It leverages the power of TF-IDF for efficient and relevant search results, making it a robust tool for querying large text datasets and a good start for data collection on news articles.
