@@ -1,7 +1,3 @@
-Here's the Portuguese (Brazil) version of your README:
-
----
-
 ### README: Processo de Web Scraping e Busca TF-IDF no Site da CNN
 
 #### Introdução
