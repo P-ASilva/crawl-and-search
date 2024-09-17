@@ -138,5 +138,7 @@ In order to test the search process, a few control cases where explored and may 
 
 **Note:** Any and all inferences based on the data are subject to the variability of the data used and the restrictions/themes of the news network from which the data were sourced, these are examples of information that may or not be accurate to the truth of the matter.
 
+**Disclaimer** ChatGpt was used to generate this readme template as well as to provide aid in formatting the text.
+
 #### Conclusion
 This application combines web scraping and text processing techniques to provide a searchable database of CNN articles. It leverages the power of TF-IDF for efficient and relevant search results, making it a robust tool for querying large text datasets and a good start for data collection on news articles.
