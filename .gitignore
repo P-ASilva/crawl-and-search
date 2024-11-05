@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+en
+glove.6B
+
 # C extensions
 *.so
 *.csv
