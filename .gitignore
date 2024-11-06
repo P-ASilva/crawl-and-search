@@ -4,8 +4,9 @@ __pycache__/
 *$py.class
 
 en
+embeddings
 glove.6B
-
+dowload.py
 # C extensions
 *.so
 *.csv

@@ -12,7 +12,7 @@ else:
     df = pd.DataFrame(columns=['title', 'subtitle', 'content'])
 # loop
 c = 0
-for pag in range(1, 10):
+for pag in range(1, 100):
     api_endpoint = f"{base_api_endpoint}{pag}/"
     response = requests.get(api_endpoint)
 

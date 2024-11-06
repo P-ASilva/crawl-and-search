@@ -26,12 +26,13 @@ import torch
 import matplotlib.pyplot as plt
 from sklearn.manifold import TSNE
 
-enhanced_doc_embeddings = torch.load('embeddings/enhanced_doc_embeddings.pt')
+# Apply PCA to reduce dimensions to 50 before applying t-SNE
+pca = PCA(n_components=50)
+embeddings_pca = pca.fit_transform(doc_embeddings_np)
 
-embeddings_np = doc_embeddings.detach().numpy()
-
+# Apply t-SNE to the PCA-reduced embeddings
 tsne = TSNE(n_components=2, random_state=42)
-embeddings_2d = tsne.fit_transform(embeddings_np)
+embeddings_2d = tsne.fit_transform(embeddings_pca)
 
 plt.figure(figsize=(10, 8))
 plt.scatter(embeddings_2d[:, 0], embeddings_2d[:, 1], c='blue', alpha=0.6, label='Document Embeddings')
