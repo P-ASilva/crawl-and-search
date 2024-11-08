@@ -7,6 +7,11 @@ en
 embeddings
 glove.6B
 dowload.py
+
+doc_embeddings.pt
+autoencoder.pt
+enhanced_embeddings.pt
+
 # C extensions
 *.so
 *.csv

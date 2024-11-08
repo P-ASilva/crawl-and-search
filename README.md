@@ -1,9 +1,16 @@
 # Document Embedding Query System
 This Readme file is primarily focused in adressing the Query-based search system used in this application, for more detail regarding web-scraping and API within this repository, check README_APS_1.
 
+## Utilizing the query system
+
+before running the API, the scripts in the repository must be used in the following order:
+
+1. webscraper_cnn.py: Setting the pages searched to 10 is advisable for faster running, as this file scrapes data from the cnn website.
+2. embedding.py: Generates base document and enhanced embeddings from the data present, using pre-trained BERT embeddings as base.
+
 ## Dataset
 
-The dataset used for the embedding-based query system is the same used in the first version of this project, set to scrape 100 pages of news articles in order to increase sample size and generate better data clusters. Each document contains title, content and origin data. This dataset has a variable and specific nature, depending on historic moments and current relevance of terms, which generates the need for pre-trained embeddings to fill in the gaps in semantic coverage. This allows for accurate document querying based on semantic relevance, weighted by the embeddings generated from the documents themselves, making it suitable for natural language processing (NLP) tasks involving text similarity and information retrieval.
+The dataset used for the embedding-based query system is the same used in the first version of this project, set to scrape 100 pages of news articles in order to increase sample size and generate better data clusters. Each document contains title, content and origin data. This dataset has a variable and specific nature, depending on the historic moment and current relevance of terms, which generates the need for pre-trained embeddings to fill in the gaps in semantic coverage. This allows for accurate document querying based on semantic relevance, weighted by the embeddings generated from the documents themselves, making it suitable for natural language processing (NLP) tasks involving text similarity and information retrieval.
 
 ## Embedding Generation Process
 
