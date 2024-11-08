@@ -6,8 +6,8 @@ import requests
 
 base_api_endpoint = "https://www.cnnbrasil.com.br/economia/macroeconomia/pagina/"
 # read cnn.csv if it exists
-if os.path.exists('cnn.csv'):
-    df = pd.read_csv('cnn.csv')
+if os.path.exists('data/cnn.csv'):
+    df = pd.read_csv('data/cnn.csv')
 else:
     df = pd.DataFrame(columns=['title', 'subtitle', 'content'])
 # loop
@@ -47,4 +47,8 @@ for pag in range(1, 100):
             df.loc[c] = {'title': title, 'subtitle': subtitle, 'content': content, 'link':link}
             c += 1
     # save df to csv
-    df.to_csv('cnn.csv')
+    if os.path.exists('data/cnn.csv'):
+        df.to_csv('data/cnn.csv', mode='a', header=False)
+    else :
+        os.mkdir('data')
+        df.to_csv('data/cnn.csv')

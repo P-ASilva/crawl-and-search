@@ -1,11 +1,10 @@
 from flask import Flask
 from flask import request
-from sklearn.feature_extraction.text import TfidfVectorizer
-import re
-from bs4 import BeautifulSoup
-import requests
+import torch.nn as nn
 import pandas as pd
 from flask import jsonify
+import torch
+from embedding_logic import get_embedding, EmbeddingAutoencoder
 
 app = Flask(__name__)
 
@@ -17,22 +16,22 @@ def hello_world():
 def query():
     q = request.args.get('query')
     # read cnn.csv with indexes 
-    df = pd.read_csv('cnn.csv', sep=',')
-    vectorizer = TfidfVectorizer()
-    df['content'] = df['content'].apply(lambda x: x.lower())
+    df = pd.read_csv('data/cnn.csv', sep=',')
 
-    X = vectorizer.fit_transform(df['content'])
-    q = q.lower()
-    Q = vectorizer.transform([q])
-    print(q)
-    R = X @ Q.T
-    R = R.toarray().flatten()
-
-    idx = R.argsort()[-10:][::-1]
-    
+    # load embeddings
+    enhanced_doc_embeddings = torch.load('embeddings/enhanced_doc_embeddings.pt')
+    print(enhanced_doc_embeddings.shape)
+    autoencoder = torch.load('autoencoder.pt')
+    query_embedding = get_embedding([q.lower()])
+    print(query_embedding.shape)
+    query_embedding = autoencoder(query_embedding)[1].squeeze()  # Get the encoded query embedding, should be (32,)
+    # Calculate Euclidean distance instead of cosine similarity
+    distances = torch.cdist(enhanced_doc_embeddings, query_embedding.unsqueeze(0), p=2)
+    print(distances.shape)
+    # Get the indices of the top 10 closest documents
+    _, idx = distances.topk(10)
     dff = df.loc[idx]
-    dff['relevance'] = R[idx].tolist()
-    print(dff['relevance'])
+    dff['relevance'] = distances[idx].tolist()
 
     json_dict = {title: {"subtitle":subtitle, "content": content[:500*4], "relevance": relevance} for title, subtitle, content, relevance in zip(dff["title"], dff['subtitle'], dff['content'], dff['relevance'])}
     sorted_results = sorted(json_dict.items(), key=lambda x: x[1]['relevance'], reverse=True)
